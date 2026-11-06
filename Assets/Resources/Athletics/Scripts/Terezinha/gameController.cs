@@ -109,7 +109,7 @@ public class gameController : MonoBehaviour {
 
 	void sortedTimes(){
 
-		if (playerBehaviour2.termina ==true && adversaryScript.termina == false && adversary2Script.termina == false && adversary3Script.termina == false){
+		if (playerBehaviourCoop.termina ==true && adversaryScript.termina == false && adversary2Script.termina == false && adversary3Script.termina == false){
 			pF=true;
 			pS= false;
 			pT=false;
@@ -122,7 +122,7 @@ public class gameController : MonoBehaviour {
 				
 			}
 		}
-		else if (playerBehaviour2.termina ==true && pF==false && pT==false){
+		else if (playerBehaviourCoop.termina ==true && pF==false && pT==false){
 			pF=pT=false;
 			pS=true;
 			if (p==0){
@@ -147,7 +147,7 @@ public class gameController : MonoBehaviour {
 			}
 			
 		}
-		else if (playerBehaviour2.termina ==false && adversaryScript.termina == true && adversary2Script.termina == true && adversary3Script.termina == true)
+		else if (playerBehaviourCoop.termina ==false && adversaryScript.termina == true && adversary2Script.termina == true && adversary3Script.termina == true)
 		{
 			pF=pS=pT=false;
 		
@@ -158,7 +158,7 @@ public class gameController : MonoBehaviour {
 			p=4;
 			
 		}	
-		else if (playerBehaviour2.termina ==false && adversaryScript.termina == false && adversary2Script.termina == false && adversary3Script.termina == false)
+		else if (playerBehaviourCoop.termina ==false && adversaryScript.termina == false && adversary2Script.termina == false && adversary3Script.termina == false)
 		{
 			pF=pS=pT=false;
 		}
@@ -210,14 +210,14 @@ public class gameController : MonoBehaviour {
 			coin = 0;
 		}
 
-		if( end == true && playerBehaviour2.termina==true && save == false){
+		if( end == true && playerBehaviourCoop.termina==true && save == false){
 			//sD = StoreDataContainer.Load();
 			//sD.storeObjects[0].coin += prizecoins;
 			//sD.Save();
 			//save = true;
 		}
 
-		result.text = "Parabéns você ganhou "+(playerBehaviour2.bonusnumber+prizecoins) +" moedas!";
+		result.text = "Parabéns você ganhou "+(playerBehaviourCoop.bonusnumber+prizecoins) +" moedas!";
 
 	}
 
@@ -235,8 +235,8 @@ public class gameController : MonoBehaviour {
 	
 		sortedTimes ();
 
-		if (playerBehaviour2.termina==true) {
-			StoreHighscore (playerBehaviour2.playertime);
+		if (playerBehaviourCoop.termina==true) {
+			StoreHighscore (playerBehaviourCoop.playertime);
 
 
 

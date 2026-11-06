@@ -10,7 +10,7 @@ public class InitialCountdown : MonoBehaviour {
 	float countdownTime = 3;
 	
 	GameObject startCanvas;
-	public playerBehaviour2 p;
+	public playerBehaviourCoop p;
 	AthleticsSounds s;
 
 	public GameObject timer;
@@ -47,6 +47,7 @@ public class InitialCountdown : MonoBehaviour {
 			c++;
 
 		}
+#if MOBILE_INPUT
 		if (CrossPlatformInputManager.GetButtonDown("Space") && c == 0)
 		{
 
@@ -56,6 +57,7 @@ public class InitialCountdown : MonoBehaviour {
 			c++;
 
 		}
+#endif
 		else if (c == 1) {
 			
 			if (t.time <= 2.5f) { 
@@ -65,7 +67,7 @@ public class InitialCountdown : MonoBehaviour {
 
 				cdAudio.Play ();
 				countdownCanvas.SetActive (false);
-				GameObject.Find ("terezinha9").GetComponent<playerBehaviour2> ().pronto = true;
+				GameObject.Find("terezinha9").GetComponent<playerBehaviourCoop>().pronto = true;
 				AthleticsController.gameStarted = true;
 				s.PlayAudio (s.background);
 				timer.SetActive (true);
@@ -81,12 +83,29 @@ public class InitialCountdown : MonoBehaviour {
 				p.startRunning ();
 				c++;
 			}
+#if MOBILE_INPUT
 			if (CrossPlatformInputManager.GetButtonDown("SetaEsquerda"))
 			{
 				p.startRunning();
 				c++;
 			}
 			if (CrossPlatformInputManager.GetButtonDown("SetaDireita"))
+			{
+				p.startRunning();
+				c++;
+			}
+#endif
+			if (Input.GetKeyDown(KeyCode.W))
+			{
+				p.startRunning();
+				c++;
+			}
+			if (Input.GetKeyDown(KeyCode.A))
+			{
+				p.startRunning();
+				c++;
+			}
+			if (Input.GetKeyDown(KeyCode.D))
 			{
 				p.startRunning();
 				c++;

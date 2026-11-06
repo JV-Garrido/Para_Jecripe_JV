@@ -551,46 +551,61 @@ public class GameController : MonoBehaviour
 
     void GameWon()
     {
+        coinManager.AddCoins(100);
+        /*
         points += 100;
         sD = StoreDataContainer.Load();
         sD.storeObjects[0].coin += 100;
         sD.Save();
         SetPoints();
+        */
     }
 
     void MatchWon()
     {
+        coinManager.AddCoins(10000);
+        /*
         points += 10000;
         sD = StoreDataContainer.Load();
         sD.storeObjects[0].coin += 10000;
         sD.Save();
         SetPoints();
+        */
     }
 
     void PerfectGame()
     {
+        coinManager.AddCoins(1000);
+        /*
         points += 1000;
         sD = StoreDataContainer.Load();
         sD.storeObjects[0].coin += 1000;
         sD.Save();
         SetPoints();
+        */
     }
 
     void PerfectSet()
     {
+        coinManager.AddCoins(3000);
+        /*
         points += 3000;
         sD = StoreDataContainer.Load();
         sD.storeObjects[0].coin += 3000;
         sD.Save();
         SetPoints();
+        */
     }
 
     void PerfectMatch()
     {
+        coinManager.AddCoins(5000);
+        /*
         points += 5000;
         sD = StoreDataContainer.Load();
         sD.storeObjects[0].coin += 5000;
         sD.Save();
+        */
     }
 
     void SetPoints()
