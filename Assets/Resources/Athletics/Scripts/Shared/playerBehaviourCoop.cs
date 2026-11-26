@@ -19,6 +19,9 @@ public class playerBehaviourCoop : MonoBehaviour
 	public Text tempo;
 	public Text countDown;
 	public GameObject rightFoot, leftFoot;
+	public GameObject rightFootDown, leftFootDown;
+	public GameObject rightFootP2, leftFootP2;
+	public GameObject rightFootP2Down, leftFootP2Down;
 	public GameObject footSupports;
 	public Transform referencia, referencia2;
 
@@ -141,11 +144,13 @@ public class playerBehaviourCoop : MonoBehaviour
 			if (SimpleInput.GetKeyDown(KeyCode.A))
 			{
 				checkP1 = 1;
+				updateFeet(true, false, false, false, true, false, false, false);
 
 			}
 			if (SimpleInput.GetKeyDown(KeyCode.RightArrow))
 			{
 				checkP2 = 1;
+				updateFeet(false, false, false, true, false, false, false, true);
 
 			}
 
@@ -157,6 +162,7 @@ public class playerBehaviourCoop : MonoBehaviour
 
 				checkP1 = 0;
 				checkP2 = 0;
+				setFeet(true, false, false, true, false, false, false, false);
 
 			}
 			if (checkP1 == 1 && checkP2 == 1)
@@ -164,8 +170,7 @@ public class playerBehaviourCoop : MonoBehaviour
 				velfrente += n * 1.8f;
 				vellado += m * 1.8f;
 				hit += 1;
-				rightFoot.SetActive(true);
-				leftFoot.SetActive(false);
+				setFeet(false, true, true, false, false, false, false, false);
 				esquerda = false;
 
 				checkP1 = 0;
@@ -178,11 +183,13 @@ public class playerBehaviourCoop : MonoBehaviour
 			if (SimpleInput.GetKeyDown(KeyCode.D))
 			{
 				checkP1 = 1;
+				updateFeet(false, true, false, false, false, true, false, false);
 
 			}
 			if (SimpleInput.GetKeyDown(KeyCode.LeftArrow))
 			{
 				checkP2 = 1;
+				updateFeet(false, false, true, false, false, false, true, false);
 
 			}
 
@@ -194,12 +201,14 @@ public class playerBehaviourCoop : MonoBehaviour
 
 				checkP1 = 0;
 				checkP2 = 0;
+				setFeet(false, true, true, false, false, false, false, false);
 			}
 
 			if (checkP1 == 1 && checkP2 == 1)
 			{
 				velfrente += n * 1.8f;
 				vellado += m * 1.8f;
+				setFeet(true, false, false, true, false, false, false, false);
 				rightFoot.SetActive(false);
 				leftFoot.SetActive(true);
 				hit += 1;
@@ -252,31 +261,33 @@ public class playerBehaviourCoop : MonoBehaviour
 			if (checkP1 == 1 && checkP2 == 1)
 			{
 				rig.velocity += velocidade * -transform.forward * 1.8f;
-				rightFoot.SetActive(true);
-				leftFoot.SetActive(false);
+				setFeet(false, true, true, false, false, false, false, false);
 				hit += 1;
 				esquerda = false;
 
 				checkP1 = 0;
 				checkP2 = 0;
 			}
-			if ((SimpleInput.GetKeyDown(KeyCode.D) || SimpleInput.GetKeyDown(KeyCode.LeftArrow)) && velfrente > 0)
+			if ((SimpleInput.GetKeyDown(KeyCode.D) || SimpleInput.GetKeyDown(KeyCode.LeftArrow)) && rig.velocity.x > 0)
 			{
 				rig.velocity -= velocidade * -transform.forward * 1.4f;
 				hit = 0;
 
 				checkP1 = 0;
 				checkP2 = 0;
+				setFeet(true, false, false, true, false, false, false, false);
 			}
 
 			if (SimpleInput.GetKeyDown(KeyCode.A))
 			{
 				checkP1 = 1;
+				updateFeet(true, false, false, false, true, false, false, false);
 
 			}
 			if (SimpleInput.GetKeyDown(KeyCode.RightArrow))
 			{
 				checkP2 = 1;
+				updateFeet(false, false, false, true, false, false, false, true);
 
 			}
 
@@ -286,31 +297,33 @@ public class playerBehaviourCoop : MonoBehaviour
 			if (checkP1 == 1 && checkP2 == 1)
 			{
 				rig.velocity += velocidade * -transform.forward * 1.8f;
-				rightFoot.SetActive(false);
-				leftFoot.SetActive(true);
+				setFeet(true, false, false, true, false, false, false, false);
 				hit += 1;
 				esquerda = true;
 
 				checkP1 = 0;
 				checkP2 = 0;
 			}
-			if ((SimpleInput.GetKeyDown(KeyCode.A) || SimpleInput.GetKeyDown(KeyCode.RightArrow)) && velfrente > 0)
+			if ((SimpleInput.GetKeyDown(KeyCode.A) || SimpleInput.GetKeyDown(KeyCode.RightArrow)) && rig.velocity.x > 0)
 			{
 				rig.velocity -= velocidade * -transform.forward * 1.4f;
 				hit = 0;
 
 				checkP1 = 0;
 				checkP2 = 0;
+				setFeet(false, true, true, false, false, false, false, false);
 			}
 
 			if (SimpleInput.GetKeyDown(KeyCode.D))
 			{
 				checkP1 = 1;
+				updateFeet(false, true, false, false, false, true, false, false);
 
 			}
 			if (SimpleInput.GetKeyDown(KeyCode.LeftArrow))
 			{
 				checkP2 = 1;
+				updateFeet(false, false, true, false, false, false, true, false);
 
 			}
 		}
@@ -332,9 +345,10 @@ public class playerBehaviourCoop : MonoBehaviour
 		}
 		else
 		{
-
+			//Debug.Log("Decisor");
 			if (transform.position.x < /*x*/ x - 2f)
 			{
+				//Debug.Log("Movimenta 1");
 				Movimenta();
 				if (transform.position.z <= 18f)
 				{
@@ -374,6 +388,7 @@ public class playerBehaviourCoop : MonoBehaviour
 						transformavelocidade = true;				
 					}			
 				*/
+				//Debug.Log("Movimenta 2");
 				Movimenta();
 				if (transform.position.x < 52 && fim)
 				{
@@ -382,8 +397,7 @@ public class playerBehaviourCoop : MonoBehaviour
 					Sounds.PlayAudio(Sounds.applause);
 					functionsScript.stopMove(rig);
 					sbtimer.SetActive(false);
-					rightFoot.SetActive(false);
-					leftFoot.SetActive(false);
+					setFeet(false, false, false, false, false, false, false, false);
 				}
 
 			}
@@ -412,9 +426,7 @@ public class playerBehaviourCoop : MonoBehaviour
 
 	public void startRunning()
 	{
-
-		rightFoot.SetActive(false);
-		leftFoot.SetActive(true);
+		setFeet(true, false, false, true, false, false, false, false);
 		rig.velocity += -transform.forward * 25;
 		velfrente = n * 20;
 		vellado = m * 20;
@@ -423,6 +435,31 @@ public class playerBehaviourCoop : MonoBehaviour
 		t.SetTimer();
 		startedRunning = true;
 
+	}
+
+	public void updateFeet(bool l1, bool r1, bool l2, bool r2, bool l1d, bool r1d, bool l2d, bool r2d)
+	{
+		bool tempStatus;
+		tempStatus = leftFoot.activeSelf; leftFoot.SetActive(!l1 ? tempStatus : !tempStatus);
+		tempStatus = rightFoot.activeSelf; rightFoot.SetActive(!r1 ? tempStatus : !tempStatus);
+		tempStatus = leftFootP2.activeSelf; leftFootP2.SetActive(!l2 ? tempStatus : !tempStatus);
+		tempStatus = rightFootP2.activeSelf; rightFootP2.SetActive(!r2 ? tempStatus : !tempStatus);
+		tempStatus = leftFootDown.activeSelf; leftFootDown.SetActive(!l1d ? tempStatus : !tempStatus);
+		tempStatus = rightFootDown.activeSelf; rightFootDown.SetActive(!r1d ? tempStatus : !tempStatus);
+		tempStatus = leftFootP2Down.activeSelf; leftFootP2Down.SetActive(!l2d ? tempStatus : !tempStatus);
+		tempStatus = rightFootP2Down.activeSelf; rightFootP2Down.SetActive(!r2d ? tempStatus : !tempStatus);
+	}
+
+	public void setFeet(bool l1, bool r1, bool l2, bool r2, bool l1d, bool r1d, bool l2d, bool r2d)
+	{
+		leftFoot.SetActive(l1);
+		rightFoot.SetActive(r1);
+		leftFootP2.SetActive(l2);
+		rightFootP2.SetActive(r2);
+		leftFootDown.SetActive(l1d);
+		rightFootDown.SetActive(r1d);
+		leftFootP2Down.SetActive(l2d);
+		rightFootP2Down.SetActive(r2d);
 	}
 
 
